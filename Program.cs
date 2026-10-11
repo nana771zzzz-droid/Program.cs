@@ -1,143 +1,148 @@
 using System;
 
-namespace ProyectoCalculadora
+namespace EjercicioCalculadora
 {
-    class Program
+    class MiPrograma
     {
         static void Main(string[] args)
         {
-            bool finalizar = false;
+            bool salir = false;
 
-            while (!finalizar)
+            while (!salir)
             {
                 Console.Clear();
-                Console.WriteLine("--- CALCULADORA C# ---");
-                Console.WriteLine("1. Sumar");
-                Console.WriteLine("2. Restar");
-                Console.WriteLine("3. Multiplicar");
-                Console.WriteLine("4. Dividir");
-                Console.WriteLine("5. Promedio de Notas");
-                Console.WriteLine("6. Salir");
-                Console.Write("\nSeleccione una opcion: ");
+                Console.WriteLine("=== MENU DE OPCIONES ===");
+                Console.WriteLine("a) Suma");
+                Console.WriteLine("b) Resta");
+                Console.WriteLine("c) Multiplicacion");
+                Console.WriteLine("d) Division");
+                Console.WriteLine("e) Evaluar Notas");
+                Console.WriteLine("f) Salir");
+                Console.Write("\nElija una opcion: ");
 
-                string opcion = Console.ReadLine();
+                string seleccion = Console.ReadLine();
 
-                switch (opcion)
+                switch (seleccion)
                 {
+                    case "a":
                     case "1":
-                        HacerSuma();
+                        CalcularSuma();
                         break;
+                    case "b":
                     case "2":
-                        HacerResta();
+                        CalcularResta();
                         break;
+                    case "c":
                     case "3":
-                        HacerMultiplicacion();
+                        CalcularMultiplicacion();
                         break;
+                    case "d":
                     case "4":
-                        HacerDivision();
+                        CalcularDivision();
                         break;
+                    case "e":
                     case "5":
-                        CalcularNotas();
+                        ProcesarCalificaciones();
                         break;
+                    case "f":
                     case "6":
-                        finalizar = true;
-                        Console.WriteLine("\nSaliendo del programa...");
+                        salir = true;
+                        Console.WriteLine("\nCerrando el sistema...");
                         break;
                     default:
-                        Console.WriteLine("\nOpcion no valida. Presione Enter para intentar de nuevo.");
-                        Console.ReadLine();
+                        Console.WriteLine("\nOpcion no valida.");
                         break;
                 }
 
-                if (!finalizar && opcion != "6")
+                if (!salir)
                 {
-                    Console.WriteLine("\nPresione Enter para volver al menu.");
-                    Console.ReadLine();
+                    Console.WriteLine("\nPresione cualquier tecla para continuar...");
+                    Console.ReadKey();
                 }
             }
         }
 
-        static void HacerSuma()
+        static void CalcularSuma()
         {
-            Console.WriteLine("\n-- Suma --");
-            double n1 = PedirNumero("Ingrese primer numero: ");
-            double n2 = PedirNumero("Ingrese segundo numero: ");
-            Console.WriteLine("Resultado: " + (n1 + n2));
+            Console.WriteLine("\n[ SUMAR ]");
+            double valor1 = LeerDato("Valor 1: ");
+            double valor2 = LeerDato("Valor 2: ");
+            Console.WriteLine("El total es: " + (valor1 + valor2));
         }
 
-        static void HacerResta()
+        static void CalcularResta()
         {
-            Console.WriteLine("\n-- Resta --");
-            double n1 = PedirNumero("Ingrese primer numero: ");
-            double n2 = PedirNumero("Ingrese segundo numero: ");
-            Console.WriteLine("Resultado: " + (n1 - n2));
+            Console.WriteLine("\n[ RESTAR ]");
+            double valor1 = LeerDato("Valor 1: ");
+            double valor2 = LeerDato("Valor 2: ");
+            Console.WriteLine("El total es: " + (valor1 - valor2));
         }
 
-        static void HacerMultiplicacion()
+        static void CalcularMultiplicacion()
         {
-            Console.WriteLine("\n-- Multiplicacion --");
-            double n1 = PedirNumero("Ingrese primer numero: ");
-            double n2 = PedirNumero("Ingrese segundo numero: ");
-            Console.WriteLine("Resultado: " + (n1 * n2));
+            Console.WriteLine("\n[ MULTIPLICAR ]");
+            double valor1 = LeerDato("Valor 1: ");
+            double valor2 = LeerDato("Valor 2: ");
+            Console.WriteLine("El total es: " + (valor1 * valor2));
         }
 
-        static void HacerDivision()
+        static void CalcularDivision()
         {
-            Console.WriteLine("\n-- Division --");
-            double n1 = PedirNumero("Ingrese primer numero: ");
-            double n2 = PedirNumero("Ingrese segundo numero: ");
+            Console.WriteLine("\n[ DIVIDIR ]");
+            double valor1 = LeerDato("Valor 1: ");
+            double valor2 = LeerDato("Valor 2: ");
 
-            if (n2 == 0)
+            if (valor2 == 0)
             {
-                Console.WriteLine("Error: No se puede dividir entre cero.");
+                Console.WriteLine("Atencion: No es posible dividir por 0.");
             }
             else
             {
-                Console.WriteLine("Resultado: " + (n1 / n2));
+                Console.WriteLine("El total es: " + (valor1 / valor2));
             }
         }
 
-        static void CalcularNotas()
+        static void ProcesarCalificaciones()
         {
-            Console.WriteLine("\n-- Control de Notas --");
-            double n1 = PedirNota("Nota 1: ");
-            double n2 = PedirNota("Nota 2: ");
-            double n3 = PedirNota("Nota 3: ");
-            double n4 = PedirNota("Nota 4: ");
+            Console.WriteLine("\n[ PROMEDIO DE NOTAS ]");
+            double c1 = LeerNota("Nota A: ");
+            double c2 = LeerNota("Nota B: ");
+            double c3 = LeerNota("Nota C: ");
+            double c4 = LeerNota("Nota D: ");
 
-            double promedio = (n1 + n2 + n3 + n4) / 4;
-            Console.WriteLine("\nPromedio final: " + promedio);
+            double notaFinal = (c1 + c2 + c3 + c4) / 4.0;
+            Console.WriteLine("\nPromedio alcanzado: " + notaFinal);
 
-            if (promedio >= 70)
+            if (notaFinal >= 70)
             {
-                Console.WriteLine("Estado: Aprobado");
+                Console.WriteLine("Resultado: APROBADO");
             }
             else
             {
-                Console.WriteLine("Estado: Reprobado");
+                Console.WriteLine("Resultado: REPROBADO");
             }
         }
 
-        static double PedirNumero(string mensaje)
+        static double LeerDato(string mensaje)
         {
-            double num;
+            double entrada;
             Console.Write(mensaje);
-            while (!double.TryParse(Console.ReadLine(), out num))
+            while (!double.TryParse(Console.ReadLine(), out entrada))
             {
-                Console.Write("Entrada invalida. Intente de nuevo: ");
+                Console.Write("Dato invalido. Intente de nuevo: ");
             }
-            return num;
+            return entrada;
         }
 
-        static double PedirNota(string mensaje)
+        static double LeerNota(string mensaje)
         {
-            double nota;
+            double calificacion;
             Console.Write(mensaje);
-            while (!double.TryParse(Console.ReadLine(), out nota) || nota < 0 || nota > 100)
+            while (!double.TryParse(Console.ReadLine(), out calificacion) || calificacion < 0 || calificacion > 100)
             {
-                Console.Write("Nota invalida (0 a 100). Intente de nuevo: ");
+                Console.Write("Calificacion fuera de rango (0-100). Reintente: ");
             }
-            return nota;
+            return calificacion;
         }
     }
 }
