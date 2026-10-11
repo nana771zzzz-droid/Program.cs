@@ -1,3 +1,6 @@
+
+//nathalia cespedes
+//2025-0999
 using System;
 
 namespace EjercicioCalculadora
